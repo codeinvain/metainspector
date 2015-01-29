@@ -18,7 +18,11 @@ module MetaInspector
       @exception_log      = options[:exception_log]
       @headers            = options[:headers]
 
-      response            # request early so we can fail early
+      if options[:response].present?
+        @response = options[:response]
+      else
+        response # request early so we can fail early
+      end
     end
 
     extend Forwardable

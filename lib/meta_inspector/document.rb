@@ -26,6 +26,7 @@ module MetaInspector
       @html_content_only  = options[:html_content_only]
       @allow_redirections = options[:allow_redirections]
       @document           = options[:document]
+      @response           = options[:response]
       @download_images    = options[:download_images]
       @headers            = options[:headers]
       @warn_level         = options[:warn_level]
@@ -38,7 +39,8 @@ module MetaInspector
                                                                 read_timeout:       @read_timeout,
                                                                 retries:            @retries,
                                                                 exception_log:      @exception_log,
-                                                                headers:            @headers) unless @document
+                                                                headers:            @headers,
+                                                                response:           @response) 
       @parser             = MetaInspector::Parser.new(self,     exception_log:      @exception_log,
                                                                 download_images:    @download_images)
     end
