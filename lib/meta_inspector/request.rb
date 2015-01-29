@@ -19,7 +19,16 @@ module MetaInspector
       @headers            = options[:headers]
 
       if options[:response].present?
-        @response = options[:response]
+        if options[:response].is_a?(Net::HTTPResponse)
+          @response = OpenStruct.new({
+            headers: options[:response].to_hash,
+            status: options[:response].code,
+            body: options[:response].body,
+            'finished?'=>true,
+            'success?'=>true,
+          })
+        else
+        end
       else
         response # request early so we can fail early
       end
