@@ -23,7 +23,7 @@ module MetaInspector
           candidates.map! { |c| c.gsub(/\s+/, ' ') }
           candidates.uniq!
           candidates.sort_by! { |t| -t.length }
-          candidates.first.strip
+          ( candidates.first || '' ).strip
         end
       end
 
