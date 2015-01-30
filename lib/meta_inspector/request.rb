@@ -28,7 +28,7 @@ module MetaInspector
             'success?'=>true,
           })
         elsif Object.const_defined?('Capybara::Session') && options[:response].is_a?(Capybara::Session)
-          headres = options[:response].response_headers.map{|k,v| {k.downcase=>v}}
+          headres = Hash[options[:response].response_headers.map{|k,v| [k.downcase,v]}]
           @response = OpenStruct.new({
             headers: headres,
             status: options[:response].status_code,
