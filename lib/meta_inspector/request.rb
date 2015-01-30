@@ -27,7 +27,15 @@ module MetaInspector
             'finished?'=>true,
             'success?'=>true,
           })
-        else
+        elsif Object.const_defined?('Capybara::Session') && options[:response].is_a?(Capybara::Session)
+          @response = OpenStruct.new({
+            headers: options[:response].response_headers,
+            status: options[:response].status_code,
+            body: options[:response].body,
+            'finished?'=>true,
+            'success?'=>true,
+          })
+
         end
       else
         response # request early so we can fail early
